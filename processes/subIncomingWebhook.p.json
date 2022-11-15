@@ -1,0 +1,126 @@
+{
+  "format" : "10.0.0",
+  "id" : "1847B44C4C474BA6",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "ivy.teams.webhook.subIncomingWebhookData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "sendText(String)",
+      "config" : {
+        "callSignature" : "sendText",
+        "input" : {
+          "params" : [
+            { "name" : "text", "type" : "String" }
+          ],
+          "map" : {
+            "out.text" : "param.text"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f3", "to" : "f2" }
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f2",
+      "type" : "RestClientCall",
+      "config" : {
+        "bodyRaw" : "{\"text\" :\"<%=in.text%>\"}",
+        "clientId" : "15deb4c0-976f-482b-8caf-1c6524bd9d0b",
+        "method" : "POST",
+        "templateParams" : {
+          "ivy.var.webhookUrl" : ""
+        },
+        "bodyInputType" : "RAW"
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : { "id" : "f4", "to" : "f1" }
+    }, {
+      "id" : "f5",
+      "type" : "CallSubStart",
+      "name" : "sendAdaptiveCard(String,String,String)",
+      "config" : {
+        "callSignature" : "sendAdaptiveCard",
+        "input" : {
+          "params" : [
+            { "name" : "text", "type" : "String" },
+            { "name" : "userId", "type" : "String" },
+            { "name" : "userName", "type" : "String" }
+          ],
+          "map" : {
+            "out.text" : "param.text",
+            "out.userId" : "param.userId",
+            "out.userName" : "param.userName"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 160 }
+      },
+      "connect" : { "id" : "f8", "to" : "f7" }
+    }, {
+      "id" : "f6",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 160 }
+      }
+    }, {
+      "id" : "f7",
+      "type" : "RestClientCall",
+      "config" : {
+        "bodyRaw" : [
+          "{",
+          "  \"type\": \"message\",",
+          "  \"attachments\": [",
+          "    {",
+          "      \"contentType\": \"application/vnd.microsoft.card.adaptive\",",
+          "      \"content\": {",
+          "        \"type\": \"AdaptiveCard\",",
+          "        \"body\": [",
+          "          {",
+          "            \"type\": \"TextBlock\",",
+          "            \"text\": \"<%=in.text%>\"",
+          "          }",
+          "        ],",
+          "        \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",",
+          "        \"version\": \"1.0\",",
+          "        \"msteams\": {",
+          "          \"entities\": [",
+          "            {",
+          "              \"type\": \"mention\",",
+          "              \"text\": \"<at><%=in.userName%></at>\",",
+          "              \"mentioned\": {",
+          "                \"id\": \"<%=in.userId%>\",",
+          "                \"name\": \"<%=in.userName%>\"",
+          "              }",
+          "            }",
+          "          ]",
+          "        }",
+          "      }",
+          "    }]",
+          "}"
+        ],
+        "clientId" : "15deb4c0-976f-482b-8caf-1c6524bd9d0b",
+        "method" : "POST",
+        "templateParams" : {
+          "ivy.var.webhookUrl" : ""
+        },
+        "bodyInputType" : "RAW"
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 160 }
+      },
+      "connect" : { "id" : "f9", "to" : "f6" }
+    } ]
+}

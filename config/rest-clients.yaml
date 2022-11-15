@@ -1,1 +1,6 @@
 RestClients:
+  Teams Webhook:
+    UUID: 15deb4c0-976f-482b-8caf-1c6524bd9d0b
+    Url: ${ivy.var.webhookUrl}
+    Features:
+    - ch.ivyteam.ivy.rest.client.mapper.JsonFeature

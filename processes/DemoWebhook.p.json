@@ -1,0 +1,86 @@
+{
+  "format" : "10.0.0",
+  "id" : "1847B486A52F0A0C",
+  "config" : {
+    "data" : "ivy.teams.webhook.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "start.ivp",
+      "config" : {
+        "callSignature" : "start",
+        "outLink" : "start.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f4", "to" : "f3" }
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "SubProcessCall",
+      "name" : "subIncomingWebhook",
+      "config" : {
+        "processCall" : "subIncomingWebhook:sendText(String)",
+        "call" : {
+          "params" : [
+            { "name" : "text", "type" : "String" }
+          ],
+          "map" : {
+            "param.text" : "\"hello world from incoming webhook\""
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f5",
+      "type" : "RequestStart",
+      "name" : "start2.ivp",
+      "config" : {
+        "callSignature" : "start2",
+        "outLink" : "start2.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 152 }
+      },
+      "connect" : { "id" : "f8", "to" : "f7" }
+    }, {
+      "id" : "f6",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 152 }
+      }
+    }, {
+      "id" : "f7",
+      "type" : "SubProcessCall",
+      "name" : "subIncomingWebhook",
+      "config" : {
+        "processCall" : "subIncomingWebhook:sendAdaptiveCard(String,String,String)",
+        "call" : {
+          "params" : [
+            { "name" : "text", "type" : "String" },
+            { "name" : "userId", "type" : "String" },
+            { "name" : "userName", "type" : "String" }
+          ],
+          "map" : {
+            "param.text" : "\"hello <at>Jane Doe</at> world from incoming webhook\"",
+            "param.userId" : "\"jane.doe@axonivy.com\"",
+            "param.userName" : "\"Jane Doe\""
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 152 }
+      },
+      "connect" : { "id" : "f9", "to" : "f6" }
+    } ]
+}

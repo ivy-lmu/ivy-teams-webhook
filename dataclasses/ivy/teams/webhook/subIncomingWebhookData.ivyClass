@@ -1,0 +1,8 @@
+subIncomingWebhookData #class
+ivy.teams.webhook #namespace
+text String #field
+text PERSISTENT #fieldModifier
+userId String #field
+userId PERSISTENT #fieldModifier
+userName String #field
+userName PERSISTENT #fieldModifier
